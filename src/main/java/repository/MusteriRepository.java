@@ -38,6 +38,28 @@ public class MusteriRepository {
     }
 
     public void update(Musteri musteri){
+        String SQL = "update tblmusteri set \n" +
+                "ad='"+musteri.getAd()+
+                "',soyad='"+musteri.getSoyad()+
+                "',tckimlik='"+musteri.getTckimlik()+
+                "',firmaadi='"+musteri.getFirmaadi()+"'," +
+                "verginumarasi='"+musteri.getVerginumarasi()+
+                "',vergidairesi='"+musteri.getVergidairesi()+
+                "',adres='"+musteri.getAdres()+
+                "',profilephoto='"+musteri.getProfilephoto()+"'," +
+                "telefon='"+musteri.getTelefon()+
+                "',email='"+musteri.getEmail()+
+                "',borclimiti="+musteri.getBorclimiti()+
+                ",musteritipi="+musteri.isMusteritipi()+
+                ",state=" +musteri.getState()+
+                "where id="+musteri.getId();
+        try{
+            pst = Db.getConnection().prepareCall(SQL);
+            pst.executeUpdate();
+            Db.closeConnection();
+        }catch (Exception e){
+            System.out.println("Müşteri update error...: "+e.toString());
+        }
     }
 
     public void delete(long id){
